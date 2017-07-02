@@ -24,7 +24,7 @@ public class RestServiceController {
 
 	@RequestMapping(value = "/{flightID}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_HTML_VALUE })
-	public ResponseEntity<?> getEmployee(@PathVariable String flightID) {
+	public ResponseEntity<?> getFlightInformation(@PathVariable String flightID) {
 
 		FlightInformation flightInfo = flightService.getFlightInfo(Integer.parseInt(flightID));
 		if (flightInfo == null) {
@@ -36,36 +36,26 @@ public class RestServiceController {
 
 	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE, MediaType.TEXT_HTML_VALUE })
-	public ResponseEntity<?> createEmployee(@RequestBody FlightInformation flightInfo) {
+	public ResponseEntity<?> createFlightInformation(@RequestBody FlightInformation flightInfo) {
 
 		FlightInformation newFlightInfo = flightService.saveFlightDetails(flightInfo);
 		return new ResponseEntity<>(newFlightInfo, HttpStatus.CREATED);
 	}
 
-	/*@RequestMapping(value = "/{empId}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteEmployee(@PathVariable String empId) {
-		String employeeId = empService.deleteEmployee(empId);
-		if (employeeId == null) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} else {
 
-			return new ResponseEntity<>(HttpStatus.ACCEPTED);
-		}
-
+	@RequestMapping(method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public FlightInformation updateFlight(@RequestBody FlightInformation flightInfo){
+		return flightService.updateFlight(flightInfo);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE })
-	public Employee updateEmployee(@RequestBody Employee employee) {
-
-		return empService.updateEmployee(employee);
-	}
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ResponseEntity<List<Employee>> getEmployees() {
-
-		List<Employee> employees = empService.getEmployees();
-		return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
-
-	}*/
+	
+	 @RequestMapping(value = "/{flightID}", method = RequestMethod.DELETE) public
+	  ResponseEntity<?> deleteFlightInformation(@PathVariable Integer flightID) { 
+		 Integer fId = flightService.deleteFlight(flightID); 
+		 if (fId == null) {
+	  return new ResponseEntity<>(HttpStatus.BAD_REQUEST); } else {
+	  
+	  return new ResponseEntity<>(HttpStatus.ACCEPTED); }
+	  
+	  }
 }
