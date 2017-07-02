@@ -62,6 +62,11 @@
 			<artifactId>streambuffer</artifactId>
 			<version>1.5.3</version>
 		</dependency>
+		<dependency>
+			<groupId>trng.imcs</groupId>
+			<artifactId>AirlineRepositories</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
